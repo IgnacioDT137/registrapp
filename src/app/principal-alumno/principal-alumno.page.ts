@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-principal-alumno',
@@ -10,7 +11,7 @@ export class PrincipalAlumnoPage implements OnInit {
 
   private usuario: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.usuario = this.router.getCurrentNavigation().extras.state.username
@@ -26,6 +27,10 @@ export class PrincipalAlumnoPage implements OnInit {
 
   asistencias() {
     this.router.navigate(["/asistencias"])
+  }
+
+  escaner() {
+    this.router.navigate(["/escaner"])
   }
 
 }

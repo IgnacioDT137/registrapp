@@ -38,3 +38,8 @@ ion-toolbar {
 }
 
 @import "../node_modules/@angular/material/prebuilt-themes/purple-green.css";
+
+body.scanner-active {
+  --background: transparent;
+  --ion-background-color: transparent;
+}

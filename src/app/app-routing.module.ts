@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'asistencias',
     loadChildren: () => import('./asistencias/asistencias.module').then( m => m.AsistenciasPageModule)
+  },  {
+    path: 'escaner',
+    loadChildren: () => import('./escaner/escaner.module').then( m => m.EscanerPageModule)
   },
+
 ];
 
 @NgModule({
