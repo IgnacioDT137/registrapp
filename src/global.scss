@@ -24,3 +24,17 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-content {
+  --background: rgba(3,43,68,255)
+}
+
+ion-toolbar {
+  --background: #222428
+}
+
+.footer-text {
+  color: white;
+}
+
+@import "../node_modules/@angular/material/prebuilt-themes/purple-green.css";

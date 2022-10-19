@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <img src="assets/logo.png" alt="logo">
+    </ion-title>
+    <div slot="end">
+      <button id="iconButton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <ion-icon name="person-circle-outline" id="icono"></ion-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="cerrarSesion()">
+          <mat-icon>lock</mat-icon>
+          <span>Cerrar Sesion</span>          
+        </button>        
+      </mat-menu>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-title color="warning" class="ion-text-center">Bienvenido {{this.username}}</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button (click)="asistencias()" color="warning" expand="block">Asistencias</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button color="warning" expand="block">Escanear QR</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button color="warning" expand="block" (click)="justificativo()">Justificar inasistencia</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="ion-text-center">
+    <ion-text class="footer-text"><small>DuocUC 2022 | Todos los derechos reservados</small></ion-text>
+  </ion-toolbar>
+</ion-footer>

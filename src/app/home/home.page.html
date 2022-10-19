@@ -1,20 +1,43 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      <img src="assets/logo.png" alt="logo" id="logo">
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title >Asistencias DuocUC</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <mat-form-field appearance="fill" class="campo">
+              <mat-label>Usuario</mat-label>
+              <input matInput [(ngModel)]="this.usuario">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="campo">
+              <mat-label>Contraseña</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="this.clave">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            <div><button mat-raised-button (click)="login()">Ingresar</button></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+
+<ion-footer>
+  <ion-toolbar class="ion-text-center">
+    <ion-text class="footer-text"><small>DuocUC 2022 | Todos los derechos reservados</small></ion-text>
+  </ion-toolbar>
+</ion-footer>
