@@ -16,13 +16,13 @@
           </ion-card-header>
         
           <ion-card-content>
-            <mat-form-field appearance="fill" class="campo">
+            <mat-form-field appearance="fill" class="bloque">
               <mat-label>Usuario</mat-label>
-              <input matInput [(ngModel)]="this.usuario">
+              <input matInput [(ngModel)]="this.usuario" class="campo">
             </mat-form-field>
-            <mat-form-field appearance="fill" class="campo">
+            <mat-form-field appearance="fill" class="bloque">
               <mat-label>Contraseña</mat-label>
-              <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="this.clave">
+              <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="this.clave" class="campo">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>

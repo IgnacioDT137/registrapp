@@ -50,13 +50,7 @@ export class HomePage implements OnInit {
 
         this.router.navigate(["/principal-alumno"], extras)
       } else {
-        const alert = await this.alertControl.create({
-          header: "Error",
-          message: "Usuario no encontrado",
-          buttons: ['OK']
-        })
         await this.errorField()
-        await alert.present()
       }
     })
   }
