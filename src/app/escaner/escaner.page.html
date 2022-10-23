@@ -4,11 +4,15 @@
       <ion-back-button>
       </ion-back-button>
     </ion-buttons>
-    <ion-title>escaner</ion-title>
+    <ion-title color="warning">Escaner QR</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button (click)="leerQR()">Leer QR</ion-button>
-  <ion-button (click)="detener()">Detener</ion-button>
+  
 </ion-content>
+
+<ion-footer>
+  <ion-button (click)="leerQR()" expand="block">Leer QR</ion-button>
+  <ion-button (click)="detener()" expand="block">Detener</ion-button>
+</ion-footer>

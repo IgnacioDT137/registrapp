@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { AlertController } from '@ionic/angular';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 
 @Component({
   selector: 'app-escaner',
@@ -9,7 +10,16 @@ import { AlertController } from '@ionic/angular';
 })
 export class EscanerPage implements OnInit {
 
-  constructor(private alertCtrl: AlertController) { }
+  private db: SQLiteObject;
+
+  constructor(private alertCtrl: AlertController, private sqlite: SQLite) { 
+    this.sqlite.create({
+      name: "data.db",
+      location: "default"
+    }).then((db:SQLiteObject)=>{
+      this.db = db
+    }).catch((e) => console.log(e))
+  }
 
   ngOnInit() {
   }
@@ -31,13 +41,20 @@ export class EscanerPage implements OnInit {
 
     if (result.hasContent) {
       const alert = await this.alertCtrl.create({
-        header: 'Alert',
-        subHeader: 'Important message',
+        header: 'Asistencia Registrada',
+        subHeader: 'Asignatura:',
         message: result.content,
-        buttons: ['OK'],
+        buttons: ['OK'],        
       });
-  
-      await alert.present();
+
+      const fechaDate = new Date()
+
+      const fechaString = fechaDate.toISOString().substring(0, 10); //yyyy-mm-dd
+
+      this.db.executeSql("INSERT INTO asistencias VALUES(?, ?)", [result.content, fechaString]).then(async () => {
+        await alert.present();
+      })
+    
     }
   }
 

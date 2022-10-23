@@ -23,8 +23,10 @@ export class HomePage {
       this.db = db
       db.executeSql("create table alumnos (usuario varchar(32), clave varchar(32))", [])
       .then(() => {db.executeSql("insert into alumnos values(?, ?)", ["fenix", "1234"]).then(()=> {
-        db.executeSql("create table justificativo (texto varchar(50))").then(() => {
-          console.log("TABLAS LISTAS BROSKI")
+        db.executeSql("create table justificativo (texto varchar(50))", []).then(() => {
+          db.executeSql("create table asistencias (ramo varchar(20), fecha varchar(100))", []).then(() => {
+            console.log("Tablas Listas")
+          })
         })        
       })})
       .catch((e) => {console.log(e)})
