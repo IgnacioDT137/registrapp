@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SQLite, SQLiteObject } from "@awesome-cordova-plugins/sqlite/ngx";
 import { AlertController } from "@ionic/angular";
 import { Router, NavigationExtras } from "@angular/router";
+import { Storage } from '@ionic/storage-angular';
+import { AnimationController } from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   private db: SQLiteObject;
   private usuario: string;
   private clave: string;
 
-  constructor(private sqlite: SQLite, private alertControl: AlertController, private router: Router) {
+  constructor(private sqlite: SQLite, private alertControl: AlertController, private router: Router, private storage: Storage, private aniCtrl: AnimationController) {
     this.sqlite.create({
       name: "data.db",
       location: "default"
@@ -39,6 +41,7 @@ export class HomePage {
   login() {
     this.db.executeSql("select * from alumnos where usuario = ? and clave = ?", [this.usuario, this.clave]).then(async (data) => {
       if (data.rows.length === 1) {
+        localStorage.setItem("logueado", "true")
         let extras: NavigationExtras = {
           state: {
             username: this.usuario
@@ -48,12 +51,39 @@ export class HomePage {
         this.router.navigate(["/principal-alumno"], extras)
       } else {
         const alert = await this.alertControl.create({
-          header: "SQLite",
-          message: "No hay datos",
+          header: "Error",
+          message: "Usuario no encontrado",
           buttons: ['OK']
         })
+        await this.errorField()
         await alert.present()
       }
     })
+  }
+
+  async errorField() {
+    this.aniCtrl.create()
+    .addElement(document.querySelectorAll(".campo"))
+    .duration(100)
+    .iterations(4)
+    .fromTo("transform", "translateX(-5px)", "translateX(0px)")
+    .fromTo("border", "2px red solid", "1px rgb(104, 98, 98) solid")
+    .fromTo("background", "red", "transparent")
+    .play()
+}
+
+  ngOnInit(): void {
+    this.storage.create()
+    this.aniCtrl.create()
+    .addElement(document.querySelector("#logo"))
+    .duration(3000)
+    .keyframes([
+      {offset: 0.01, transform: "scale(1)", opacity: 0},
+      {offset:0.25, transform: "scale(1)", opacity:0.25},
+      {offset: 0.5, transform: "scale(1)", opacity: 0.5},
+      {offset: 0.75, transform: "scale(1)", opacity: 0.75},
+      {offset: 1, transform: "scale(1)", opacity: 1}
+    ])
+    .play()
   }
 }

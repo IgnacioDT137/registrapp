@@ -18,6 +18,7 @@ export class PrincipalAlumnoPage implements OnInit {
   }
 
   cerrarSesion() {
+    localStorage.removeItem("logueado")
     this.router.navigate(["/home"])
   }
 
